@@ -3,102 +3,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NAGI STORE | متجر ناجي</title>
+    <title>NAGI STORE | متجر ناجي المطور</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@700&display=swap" rel="stylesheet">
     <style>
-        :root { --main: #ff4b2b; --sub: #ff416c; --pc: #007bff; --mobile: #28a745; --bypass: #6f42c1; --bg: #0a0a0c; --card: #151518; }
-        body { background: var(--bg); color: white; font-family: 'Cairo', sans-serif; margin: 0; }
+        :root { --main: #ff4b2b; --sub: #ff416c; --pc: #007bff; --mobile: #28a745; --bypass: #6f42c1; --bg: #0a0a0c; --card: rgba(21, 21, 24, 0.9); }
+        body { background: var(--bg); color: white; font-family: 'Cairo', sans-serif; margin: 0; overflow-x: hidden; }
+
+        #particles-js { position: fixed; width: 100%; height: 100%; top: 0; left: 0; z-index: -1; }
+
         header { background: linear-gradient(135deg, var(--main), var(--sub)); padding: 40px 20px; text-align: center; clip-path: polygon(0 0, 100% 0, 100% 85%, 0% 100%); }
-        .section-title { text-align: center; margin-top: 50px; font-size: 2rem; color: #fff; border-bottom: 2px solid var(--main); display: table; margin-left: auto; margin-right: auto; padding-bottom: 10px; }
-        .container { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; padding: 30px 20px; }
-        .card { background: var(--card); border: 1px solid #222; border-radius: 20px; width: 280px; padding: 25px; text-align: center; transition: 0.4s; }
+        .section-title { text-align: center; margin-top: 50px; font-size: 1.8rem; color: #fff; border-bottom: 2px solid var(--main); display: table; margin-left: auto; margin-right: auto; padding-bottom: 10px; position: relative; }
+        
+        .container { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; padding: 30px 20px; position: relative; }
+        
+        .card { background: var(--card); border: 1px solid #222; border-radius: 20px; width: 260px; padding: 20px; text-align: center; transition: 0.4s; backdrop-filter: blur(5px); }
         .card:hover { transform: translateY(-10px); border-color: var(--main); box-shadow: 0 10px 30px rgba(255, 75, 43, 0.2); }
-        .price { font-size: 30px; font-weight: bold; margin: 15px 0; color: #fff; }
-        .features { list-style: none; padding: 0; margin-bottom: 20px; text-align: right; font-size: 13px; min-height: 60px; }
-        .features li { margin: 5px 0; color: #bbb; border-bottom: 1px solid #222; padding-bottom: 5px; }
-        .features li::before { content: "✔️ "; }
+        
+        .price { font-size: 28px; font-weight: bold; margin: 15px 0; }
         .id-input { width: 90%; padding: 10px; margin-bottom: 15px; border-radius: 8px; border: 1px solid #333; background: #000; color: #fff; text-align: center; outline: none; }
+        
         .btn { color: white; border: none; padding: 12px; width: 100%; border-radius: 10px; font-size: 16px; font-weight: bold; cursor: pointer; transition: 0.3s; }
         .btn-pc { background: var(--pc); }
         .btn-mobile { background: var(--mobile); }
         .btn-bypass { background: var(--bypass); }
         .btn-vip { background: linear-gradient(90deg, #ffd700, #ffa500); color: black; }
-        footer { padding: 40px; text-align: center; color: #444; cursor: pointer; }
+
+        #admin-section { display: none; padding: 50px 20px; background: rgba(0,0,0,0.95); border-top: 5px solid var(--main); margin-top: 50px; }
+        .order-table { width: 100%; border-collapse: collapse; color: white; font-size: 14px; }
+        .order-table th, .order-table td { border: 1px solid #333; padding: 10px; text-align: center; }
+        .order-table th { background: var(--main); }
+        
+        footer { padding: 60px; text-align: center; color: #444; cursor: pointer; font-size: 12px; }
     </style>
 </head>
 <body>
 
+<div id="particles-js"></div>
+
 <header>
     <h1>NAGI STORE</h1>
-    <p>متجرك الأول لأدوات فري فاير الاحترافية</p>
+    <p>المتجر الأقوى لخدمات الـ PC والـ Mobile والـ Bypass</p>
 </header>
 
-<h2 class="section-title"><i class="fas fa-desktop"></i> بانلات الكمبيوتر والـ Bypass</h2>
+<h2 class="section-title"><i class="fas fa-desktop"></i> بانلات الكمبيوتر (PC)</h2>
 <div class="container">
-    <div class="card">
-        <h3>PC - مجاني</h3>
-        <div class="price">FREE</div>
-        <ul class="features"><li>إيمبوت أساسي</li><li>نسخة تجريبية</li></ul>
-        <input type="text" id="pc-free" class="id-input" placeholder="اسمك في ديسكورد">
-        <button onclick="sendOrder('pc-free', 'PC Free', 'https://discord.gg/hkDGqjK2yn')" class="btn btn-pc">تحميل</button>
-    </div>
-    <div class="card" style="border-color: var(--pc);">
-        <h3>PC - بريميوم</h3>
-        <div class="price">15$</div>
-        <ul class="features"><li>هيدشوت عالي</li><li>حماية مستقرة</li></ul>
-        <input type="text" id="pc-pro" class="id-input" placeholder="اسمك في ديسكورد">
-        <button onclick="sendOrder('pc-pro', 'PC Premium', 'https://discord.gg/hkDGqjK2yn')" class="btn btn-pc">شراء الآن</button>
-    </div>
-    <div class="card" style="border-color: #ffd700;">
-        <h3>PC - VIP</h3>
-        <div class="price">30$</div>
-        <ul class="features"><li>إيمبوت 100%</li><li>تحديثات فورية</li></ul>
-        <input type="text" id="pc-vip" class="id-input" placeholder="اسمك في ديسكورد">
-        <button onclick="sendOrder('pc-vip', 'PC VIP', 'https://discord.gg/hkDGqjK2yn')" class="btn btn-vip">امتلك القوة</button>
-    </div>
-    <div class="card" style="border-color: var(--bypass);">
-        <h3>Bypass - PC</h3>
-        <div class="price">10$</div>
-        <ul class="features"><li>تخطي المحاكي 100%</li><li>ضد الباند (Anti-Ban)</li></ul>
-        <input type="text" id="pc-bypass" class="id-input" placeholder="اسمك في ديسكورد">
-        <button onclick="sendOrder('pc-bypass', 'Bypass PC', 'https://discord.gg/hkDGqjK2yn')" class="btn btn-bypass">شراء Bypass</button>
-    </div>
+    <div class="card"><h3>PC FREE</h3><div class="price">FREE</div><input type="text" id="pc1" class="id-input" placeholder="اسمك ديسكورد"><button onclick="sendOrder('pc1','PC Free')" class="btn btn-pc">تحميل</button></div>
+    <div class="card" style="border-color: var(--pc);"><h3>PC Premium</h3><div class="price">15$</div><input type="text" id="pc2" class="id-input" placeholder="اسمك ديسكورد"><button onclick="sendOrder('pc2','PC Pro')" class="btn btn-pc">شراء</button></div>
+    <div class="card" style="border-color: #ffd700;"><h3>PC VIP</h3><div class="price">30$</div><input type="text" id="pc3" class="id-input" placeholder="اسمك ديسكورد"><button onclick="sendOrder('pc3','PC VIP')" class="btn btn-vip">شراء</button></div>
+</div>
+
+<h2 class="section-title"><i class="fas fa-shield-alt"></i> قسم الـ Bypass (PC)</h2>
+<div class="container">
+    <div class="card"><h3>Bypass Free</h3><div class="price">FREE</div><input type="text" id="bp1" class="id-input" placeholder="اسمك ديسكورد"><button onclick="sendOrder('bp1','Bypass Free')" class="btn btn-bypass">تحميل</button></div>
+    <div class="card" style="border-color: var(--bypass);"><h3>Bypass Premium</h3><div class="price">10$</div><input type="text" id="bp2" class="id-input" placeholder="اسمك ديسكورد"><button onclick="sendOrder('bp2','Bypass Pro')" class="btn btn-bypass">شراء</button></div>
+    <div class="card" style="border-color: #ffd700;"><h3>Bypass VIP</h3><div class="price">20$</div><input type="text" id="bp3" class="id-input" placeholder="اسمك ديسكورد"><button onclick="sendOrder('bp3','Bypass VIP')" class="btn btn-vip">شراء</button></div>
 </div>
 
 <h2 class="section-title"><i class="fas fa-mobile-alt"></i> بانلات الهواتف (MOBILE)</h2>
 <div class="container">
-    <div class="card">
-        <h3>Mobile - مجاني</h3>
-        <div class="price">FREE</div>
-        <ul class="features"><li>كشف أماكن</li><li>تثبيت إيم</li></ul>
-        <input type="text" id="mob-free" class="id-input" placeholder="اسمك في ديسكورد">
-        <button onclick="sendOrder('mob-free', 'Mob Free', 'https://discord.gg/hkDGqjK2yn')" class="btn btn-mobile">تحميل</button>
-    </div>
-    <div class="card" style="border-color: var(--mobile);">
-        <h3>Mobile - بريميوم</h3>
-        <div class="price">10$</div>
-        <ul class="features"><li>إيم لوك قوي</li><li>حماية مرتفعة</li></ul>
-        <input type="text" id="mob-pro" class="id-input" placeholder="اسمك في ديسكورد">
-        <button onclick="sendOrder('mob-pro', 'Mob Premium', 'https://discord.gg/hkDGqjK2yn')" class="btn btn-mobile">شراء الآن</button>
-    </div>
-    <div class="card" style="border-color: #ffd700;">
-        <h3>Mobile - VIP</h3>
-        <div class="price">20$</div>
-        <ul class="features"><li>طيران وسرعة</li><li>أقوى حماية للموبايل</li></ul>
-        <input type="text" id="mob-vip" class="id-input" placeholder="اسمك في ديسكورد">
-        <button onclick="sendOrder('mob-vip', 'Mob VIP', 'https://discord.gg/hkDGqjK2yn')" class="btn btn-vip">اشترِ الآن</button>
-    </div>
+    <div class="card"><h3>Mob Free</h3><div class="price"> Mobile FREE</div><input type="text" id="m1" class="id-input" placeholder="اسمك ديسكورد"><button onclick="sendOrder('m1','Mob Free')" class="btn btn-mobile">تحميل</button></div>
+    <div class="card" style="border-color: var(--mobile);"><h3>Mobile  Premium</h3><div class="price">10$</div><input type="text" id="m2" class="id-input" placeholder="اسمك ديسكورد"><button onclick="sendOrder('m2','Mob Pro')" class="btn btn-mobile">شراء</button></div>
+    <div class="card" style="border-color: #ffd700;"><h3>Mobile  VIP</h3><div class="price">20$</div><input type="text" id="m3" class="id-input" placeholder="اسمك ديسكورد"><button onclick="sendOrder('m3','Mob VIP')" class="btn btn-vip">شراء</button></div>
 </div>
 
-<footer onclick="showAdmin()">DEVELOPED BY NAGI</footer>
+<div id="admin-section">
+    <h2 style="text-align:center;">إدارة الطلبات</h2>
+    <div style="overflow-x:auto;"><table class="order-table"><thead><tr><th>الزبون</th><th>المنتج</th><th>الوقت</th><th>الحالة</th><th>إجراء</th></tr></thead><tbody id="orders-list"></tbody></table></div>
+</div>
 
+<footer onclick="loginAdmin()">DEVELOPED BY NAGI</footer>
+
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
 
 <script>
-    // --- بيانات Firebase الخاصة بك ---
-     const firebaseConfig = {
+    particlesJS("particles-js", { "particles": { "number": { "value": 60 }, "color": { "value": "#ff4b2b" }, "shape": { "type": "circle" }, "opacity": { "value": 0.5 }, "size": { "value": 3 }, "line_linked": { "enable": true, "distance": 150, "color": "#ff4b2b", "opacity": 0.4, "width": 1 }, "move": { "enable": true, "speed": 2 } }, "interactivity": { "events": { "onhover": { "enable": true, "mode": "repulse" } } } });
+
+    const firebaseConfig = {
+         const firebaseConfig = {
   apiKey: "AIzaSyATcxGXTqFzl0P9uG74fV21sNEs_8XWScc",
   authDomain: "nagishop-d1245.firebaseapp.com",
   databaseURL: "https://nagishop-d1245-default-rtdb.firebaseio.com",
@@ -108,26 +92,34 @@
   appId: "1:441739735134:web:d597a678f84b4f763384cf",
   measurementId: "G-QDWP25QS77"
 };
-
     firebase.initializeApp(firebaseConfig);
     const db = firebase.database();
 
-    function sendOrder(inputId, type, link) {
+    function sendOrder(inputId, type) {
         let name = document.getElementById(inputId).value;
         if(name.trim() !== "") {
-            db.ref('orders').push({
-                product: type,
-                customer: name,
-                time: new Date().toLocaleString()
-            }).then(() => {
-                alert("تم تسجيل طلبك لـ " + type);
-                window.open(link, '_blank');
+            db.ref('orders').push({ product: type, customer: name, time: new Date().toLocaleString(), status: 'pending' })
+            .then(() => { window.location.href = "https://discord.gg/hkDGqjK2yn"; });
+        } else { alert("اكتب اسمك أولاً!"); }
+    }
+
+    function loginAdmin() {
+        let user = prompt("User:"); let pass = prompt("Pass:");
+        if(user === "admin" && pass === "nagi2026") { document.getElementById('admin-section').style.display = "block"; loadOrders(); }
+    }
+
+    function loadOrders() {
+        db.ref('orders').on('value', (s) => {
+            const list = document.getElementById('orders-list'); list.innerHTML = "";
+            s.forEach((c) => {
+                const d = c.val(); const k = c.key;
+                const isDone = d.status === 'done';
+                list.innerHTML += `<tr style="${isDone ? 'background: #0a290a;' : ''}"><td>${d.customer}</td><td>${d.product}</td><td>${d.time}</td><td>${isDone ? '✅' : '⏳'}</td>
+                <td><button onclick="db.ref('orders/${k}').update({status:'done'})">✔</button>
+                <button onclick="db.ref('orders/${k}').remove()">✖</button></td></tr>`;
             });
-        } else {
-            alert("اكتب اسمك في ديسكورد أولاً!");
-        }
+        });
     }
 </script>
 </body>
 </html>
-
