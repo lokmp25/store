@@ -21,19 +21,26 @@
 
         header { background: linear-gradient(135deg, var(--main), var(--sub)); padding: 40px 20px; text-align: center; clip-path: polygon(0 0, 100% 0, 100% 85%, 0% 100%); }
         .section-title { text-align: center; margin-top: 50px; font-size: 1.8rem; color: #fff; border-bottom: 2px solid var(--main); display: table; margin-left: auto; margin-right: auto; padding-bottom: 10px; position: relative; }
+        
         .container { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; padding: 30px 20px; position: relative; }
+        
         .card { background: var(--card); border: 1px solid #222; border-radius: 20px; width: 260px; padding: 20px; text-align: center; transition: 0.4s; backdrop-filter: blur(10px); }
         .card:hover { transform: translateY(-10px); border-color: var(--main); box-shadow: 0 10px 30px rgba(255, 75, 43, 0.4); }
+        
         .price { font-size: 28px; font-weight: bold; margin: 15px 0; }
         .id-input { width: 90%; padding: 10px; margin-bottom: 15px; border-radius: 8px; border: 1px solid #333; background: #000; color: #fff; text-align: center; outline: none; }
+        
         .btn { color: white; border: none; padding: 12px; width: 100%; border-radius: 10px; font-size: 16px; font-weight: bold; cursor: pointer; transition: 0.3s; }
-        .btn-pc { background: var(--pc); } .btn-mobile { background: var(--mobile); } .btn-bypass { background: var(--bypass); }
+        .btn-pc { background: var(--pc); }
+        .btn-mobile { background: var(--mobile); }
+        .btn-bypass { background: var(--bypass); }
         .btn-vip { background: linear-gradient(90deg, #ffd700, #ffa500); color: black; }
 
         #admin-section { display: none; padding: 50px 20px; background: rgba(0,0,0,0.95); border-top: 5px solid var(--main); margin-top: 50px; }
         .order-table { width: 100%; border-collapse: collapse; color: white; font-size: 14px; }
         .order-table th, .order-table td { border: 1px solid #333; padding: 10px; text-align: center; }
         .order-table th { background: var(--main); }
+        
         footer { padding: 60px; text-align: center; color: #444; cursor: pointer; font-size: 12px; }
     </style>
 </head>
@@ -42,8 +49,8 @@
 <div id="star-container"></div>
 
 <header>
-    <h1>NAGI STORE</h1>
-    <p>خدمات فري فاير الاحترافية</p>
+    <h1>NAGI STORE 💎</h1>
+    <p>بانلات فري فاير </p>
 </header>
 
 <h2 class="section-title"><i class="fas fa-desktop"></i> بانلات PC</h2>
@@ -62,14 +69,19 @@
 
 <h2 class="section-title"><i class="fas fa-mobile-alt"></i> بانلات Mobile</h2>
 <div class="container">
-    <div class="card"><h3>Mob Free</h3><div class="price">FREE</div><input type="text" id="m1" class="id-input" placeholder="ديسكورد"><button onclick="sendOrder('m1','Mob Free')" class="btn btn-mobile">تحميل</button></div>
-    <div class="card" style="border-color: var(--mobile);"><h3>Mob Premium</h3><div class="price">10$</div><input type="text" id="m2" class="id-input" placeholder="ديسكورد"><button onclick="sendOrder('m2','Mob Pro')" class="btn btn-mobile">شراء</button></div>
-    <div class="card" style="border-color: #ffd700;"><h3>Mob VIP</h3><div class="price">20$</div><input type="text" id="m3" class="id-input" placeholder="ديسكورد"><button onclick="sendOrder('m3','Mob VIP')" class="btn btn-vip">شراء</button></div>
+    <div class="card"><h3>Mob Free</h3><div class="price">FREE</div><input type="text" id="m1" class="id-input" placeholder="ID اللاعب"><button onclick="sendOrder('m1','Mob Free')" class="btn btn-mobile">تحميل</button></div>
+    <div class="card" style="border-color: var(--mobile);"><h3>Mob Premium</h3><div class="price">10$</div><input type="text" id="m2" class="id-input" placeholder="ID اللاعب"><button onclick="sendOrder('m2','Mob Pro')" class="btn btn-mobile">شراء</button></div>
+    <div class="card" style="border-color: #ffd700;"><h3>Mob VIP</h3><div class="price">20$</div><input type="text" id="m3" class="id-input" placeholder="ID اللاعب"><button onclick="sendOrder('m3','Mob VIP')" class="btn btn-vip">شراء</button></div>
 </div>
 
 <div id="admin-section">
-    <h2 style="text-align:center;">إدارة الطلبات</h2>
-    <div style="overflow-x:auto;"><table class="order-table"><thead><tr><th>الزبون</th><th>المنتج</th><th>الحالة</th><th>إجراء</th></tr></thead><tbody id="orders-list"></tbody></table></div>
+    <h2 style="text-align:center; color: var(--main);">إدارة الطلبات</h2>
+    <div style="overflow-x:auto;">
+        <table class="order-table">
+            <thead><tr><th>الزبون</th><th>المنتج</th><th>الحالة</th><th>إجراء</th></tr></thead>
+            <tbody id="orders-list"></tbody>
+        </table>
+    </div>
 </div>
 
 <footer onclick="loginAdmin()">DEVELOPED BY NAGI</footer>
@@ -86,12 +98,12 @@
         star.style.left = Math.random() * 100 + '%';
         star.style.top = Math.random() * 100 + '%';
         const size = Math.random() * 4 + 2 + 'px';
-        star.style.width = size;
-        star.style.height = size;
+        star.style.width = size; star.style.height = size;
         star.style.setProperty('--speed', Math.random() * 3 + 2 + 's');
         container.appendChild(star);
     }
 
+    // إعدادات Firebase
     const firebaseConfig = {
         apiKey: "AIzaSyATcxGXTqFzl0P9uG74fV21sNEs_8XWScc",
         authDomain: "nagishop-d1245.firebaseapp.com",
@@ -104,17 +116,43 @@
     firebase.initializeApp(firebaseConfig);
     const db = firebase.database();
 
+    // اضع رابط الـ Webhook الخاص بك هنا
+    const discordWebhookUrl = "https://discord.com/api/webhooks/1475210808626516038/4PA8Ncmm-eIMTu8exqTwVfD02FWKu_acdGaTu79kBbznBEAmmbaEyTlh840c5uBXq5Hb";
+
     function sendOrder(inputId, type) {
         let name = document.getElementById(inputId).value;
         if(name.trim() !== "") {
-            db.ref('orders').push({ product: type, customer: name, time: new Date().toLocaleString(), status: 'pending' })
-            .then(() => { window.location.href = "https://discord.gg/hkDGqjK2yn"; });
-        } else { alert("اكتب اسمك أولاً!"); }
+            // حفظ في Firebase
+            db.ref('orders').push({ product: type, customer: name, time: new Date().toLocaleString(), status: 'pending' });
+
+            // إرسال لديسكورد
+            if(discordWebhookUrl !== "ضع_رابط_الويب_هوك_هنا") {
+                fetch(discordWebhookUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        content: "🔔 **طلب جديد في NAGI STORE!**",
+                        embeds: [{
+                            title: "معلومات الزبون",
+                            color: 16728875,
+                            fields: [
+                                { name: "الاسم/الآيدي", value: name, inline: true },
+                                { name: "المنتج", value: type, inline: true }
+                            ],
+                            footer: { text: "تاريخ الطلب: " + new Date().toLocaleString() }
+                        }]
+                    })
+                });
+            }
+
+            alert("تم إرسال طلبك! سيتم تحويلك للديسكورد.");
+            window.location.href = "https://discord.gg/hkDGqjK2yn";
+        } else { alert("اكتب اسمك أو الآيدي أولاً!"); }
     }
 
     function loginAdmin() {
         let user = prompt("User:"); let pass = prompt("Pass:");
-        if(user === "admin" && pass === "nagi2026") { document.getElementById('admin-section').style.display = "block"; loadOrders(); }
+        if(user === "admin" && pass === "00") { document.getElementById('admin-section').style.display = "block"; loadOrders(); }
     }
 
     function loadOrders() {
@@ -123,7 +161,7 @@
             s.forEach((c) => {
                 const d = c.val(); const k = c.key;
                 const isDone = d.status === 'done';
-                list.innerHTML += `<tr style="${isDone ? 'background: #0a290a;' : ''}"><td>${d.customer}</td><td>${d.product}</td><td>${isDone ? '✅' : '⏳'}</td>
+                list.innerHTML += `<tr style="${isDone ? 'background: #0a290a;' : ''}"><td>${d.customer}</td><td>${d.product}</td><td>${isDone ? '✅ مكتمل' : '⏳ انتظار'}</td>
                 <td><button onclick="db.ref('orders/${k}').update({status:'done'})">✔</button>
                 <button onclick="db.ref('orders/${k}').remove()">✖</button></td></tr>`;
             });
@@ -132,4 +170,3 @@
 </script>
 </body>
 </html>
-
