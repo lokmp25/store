@@ -3,86 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NAGI STORE | متجر ناجي المطور</title>
+    <title>NAGI STORE | المطور</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@700&display=swap" rel="stylesheet">
     <style>
         :root { --main: #ff4b2b; --sub: #ff416c; --pc: #007bff; --mobile: #28a745; --bypass: #6f42c1; --bg: #0a0a0c; --card: rgba(21, 21, 24, 0.85); }
-        
         body { background: var(--bg); color: white; font-family: 'Cairo', sans-serif; margin: 0; overflow-x: hidden; position: relative; }
 
-        /* تأثير الخلفية المتحركة الجديد (نجوم تتحرك) */
-        #bg-animation {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -1; background: radial-gradient(circle at center, #1b1b1b 0%, #000 100%);
-        }
-        .star {
-            position: absolute; background: white; border-radius: 50%;
-            opacity: 0.5; animation: moveStars linear infinite;
-        }
-        @keyframes moveStars {
-            from { transform: translateY(0); }
-            to { transform: translateY(-1000px); }
+        /* تأثير النجوم المتوهجة المتحركة */
+        #star-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; background: #000; overflow: hidden; }
+        .star { position: absolute; background: var(--main); border-radius: 50%; box-shadow: 0 0 10px var(--main), 0 0 20px var(--main); filter: blur(1px); opacity: 0; animation: blink-move var(--speed) infinite ease-in-out; }
+        @keyframes blink-move {
+            0% { opacity: 0; transform: translateY(0) scale(0.5); }
+            50% { opacity: 0.8; transform: translateY(-20px) scale(1.2); }
+            100% { opacity: 0; transform: translateY(-40px) scale(0.5); }
         }
 
-        header { background: linear-gradient(135deg, var(--main), var(--sub)); padding: 40px 20px; text-align: center; clip-path: polygon(0 0, 100% 0, 100% 85%, 0% 100%); position: relative; }
-        .section-title { text-align: center; margin-top: 50px; font-size: 1.8rem; color: #fff; border-bottom: 2px solid var(--main); display: table; margin-left: auto; margin-right: auto; padding-bottom: 10px; position: relative; text-shadow: 0 0 10px var(--main); }
-        
+        header { background: linear-gradient(135deg, var(--main), var(--sub)); padding: 40px 20px; text-align: center; clip-path: polygon(0 0, 100% 0, 100% 85%, 0% 100%); }
+        .section-title { text-align: center; margin-top: 50px; font-size: 1.8rem; color: #fff; border-bottom: 2px solid var(--main); display: table; margin-left: auto; margin-right: auto; padding-bottom: 10px; position: relative; }
         .container { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; padding: 30px 20px; position: relative; }
-        
         .card { background: var(--card); border: 1px solid #222; border-radius: 20px; width: 260px; padding: 20px; text-align: center; transition: 0.4s; backdrop-filter: blur(10px); }
-        .card:hover { transform: translateY(-10px); border-color: var(--main); box-shadow: 0 10px 30px rgba(255, 75, 43, 0.3); }
-        
-        .price { font-size: 28px; font-weight: bold; margin: 15px 0; color: #fff; }
+        .card:hover { transform: translateY(-10px); border-color: var(--main); box-shadow: 0 10px 30px rgba(255, 75, 43, 0.4); }
+        .price { font-size: 28px; font-weight: bold; margin: 15px 0; }
         .id-input { width: 90%; padding: 10px; margin-bottom: 15px; border-radius: 8px; border: 1px solid #333; background: #000; color: #fff; text-align: center; outline: none; }
-        
         .btn { color: white; border: none; padding: 12px; width: 100%; border-radius: 10px; font-size: 16px; font-weight: bold; cursor: pointer; transition: 0.3s; }
-        .btn-pc { background: var(--pc); }
-        .btn-mobile { background: var(--mobile); }
-        .btn-bypass { background: var(--bypass); }
+        .btn-pc { background: var(--pc); } .btn-mobile { background: var(--mobile); } .btn-bypass { background: var(--bypass); }
         .btn-vip { background: linear-gradient(90deg, #ffd700, #ffa500); color: black; }
 
         #admin-section { display: none; padding: 50px 20px; background: rgba(0,0,0,0.95); border-top: 5px solid var(--main); margin-top: 50px; }
         .order-table { width: 100%; border-collapse: collapse; color: white; font-size: 14px; }
         .order-table th, .order-table td { border: 1px solid #333; padding: 10px; text-align: center; }
         .order-table th { background: var(--main); }
-        
         footer { padding: 60px; text-align: center; color: #444; cursor: pointer; font-size: 12px; }
     </style>
 </head>
 <body>
 
-<div id="bg-animation"></div>
+<div id="star-container"></div>
 
 <header>
     <h1>NAGI STORE</h1>
-    <p>المتجر الأقوى لخدمات الـ PC والـ Mobile والـ Bypass</p>
+    <p>خدمات فري فاير الاحترافية</p>
 </header>
 
-<h2 class="section-title"><i class="fas fa-desktop"></i> بانلات الكمبيوتر (PC)</h2>
+<h2 class="section-title"><i class="fas fa-desktop"></i> بانلات PC</h2>
 <div class="container">
-    <div class="card"><h3>PC FREE</h3><div class="price">FREE</div><input type="text" id="pc1" class="id-input" placeholder="اسمك ديسكورد"><button onclick="sendOrder('pc1','PC Free')" class="btn btn-pc">تحميل</button></div>
-    <div class="card" style="border-color: var(--pc);"><h3>PC PRO</h3><div class="price">15$</div><input type="text" id="pc2" class="id-input" placeholder="اسمك ديسكورد"><button onclick="sendOrder('pc2','PC Pro')" class="btn btn-pc">شراء</button></div>
-    <div class="card" style="border-color: #ffd700;"><h3>PC VIP</h3><div class="price">30$</div><input type="text" id="pc3" class="id-input" placeholder="اسمك ديسكورد"><button onclick="sendOrder('pc3','PC VIP')" class="btn btn-vip">شراء</button></div>
+    <div class="card"><h3>PC FREE</h3><div class="price">FREE</div><input type="text" id="pc1" class="id-input" placeholder="ديسكورد"><button onclick="sendOrder('pc1','PC Free')" class="btn btn-pc">تحميل</button></div>
+    <div class="card" style="border-color: var(--pc);"><h3>PC PRO</h3><div class="price">15$</div><input type="text" id="pc2" class="id-input" placeholder="ديسكورد"><button onclick="sendOrder('pc2','PC Pro')" class="btn btn-pc">شراء</button></div>
+    <div class="card" style="border-color: #ffd700;"><h3>PC VIP</h3><div class="price">30$</div><input type="text" id="pc3" class="id-input" placeholder="ديسكورد"><button onclick="sendOrder('pc3','PC VIP')" class="btn btn-vip">شراء</button></div>
 </div>
 
-<h2 class="section-title"><i class="fas fa-shield-alt"></i> قسم الـ Bypass (PC)</h2>
+<h2 class="section-title"><i class="fas fa-shield-alt"></i> Bypass PC</h2>
 <div class="container">
-    <div class="card"><h3>Bypass Free</h3><div class="price">FREE</div><input type="text" id="bp1" class="id-input" placeholder="اسمك ديسكورد"><button onclick="sendOrder('bp1','Bypass Free')" class="btn btn-bypass">تحميل</button></div>
-    <div class="card" style="border-color: var(--bypass);"><h3>Bypass Pro</h3><div class="price">10$</div><input type="text" id="bp2" class="id-input" placeholder="اسمك ديسكورد"><button onclick="sendOrder('bp2','Bypass Pro')" class="btn btn-bypass">شراء</button></div>
-    <div class="card" style="border-color: #ffd700;"><h3>Bypass VIP</h3><div class="price">20$</div><input type="text" id="bp3" class="id-input" placeholder="اسمك ديسكورد"><button onclick="sendOrder('bp3','Bypass VIP')" class="btn btn-vip">شراء</button></div>
+    <div class="card"><h3>Bypass Free</h3><div class="price">FREE</div><input type="text" id="bp1" class="id-input" placeholder="ديسكورد"><button onclick="sendOrder('bp1','Bypass Free')" class="btn btn-bypass">تحميل</button></div>
+    <div class="card" style="border-color: var(--bypass);"><h3>Bypass Pro</h3><div class="price">10$</div><input type="text" id="bp2" class="id-input" placeholder="ديسكورد"><button onclick="sendOrder('bp2','Bypass Pro')" class="btn btn-bypass">شراء</button></div>
+    <div class="card" style="border-color: #ffd700;"><h3>Bypass VIP</h3><div class="price">20$</div><input type="text" id="bp3" class="id-input" placeholder="ديسكورد"><button onclick="sendOrder('bp3','Bypass VIP')" class="btn btn-vip">شراء</button></div>
 </div>
 
-<h2 class="section-title"><i class="fas fa-mobile-alt"></i> بانلات الهواتف (MOBILE)</h2>
+<h2 class="section-title"><i class="fas fa-mobile-alt"></i> بانلات Mobile</h2>
 <div class="container">
-    <div class="card"><h3>Mob Free</h3><div class="price">FREE</div><input type="text" id="m1" class="id-input" placeholder="اسمك ديسكورد"><button onclick="sendOrder('m1','Mob Free')" class="btn btn-mobile">تحميل</button></div>
-    <div class="card" style="border-color: var(--mobile);"><h3>Mob Pro</h3><div class="price">10$</div><input type="text" id="m2" class="id-input" placeholder="اسمك ديسكورد"><button onclick="sendOrder('m2','Mob Pro')" class="btn btn-mobile">شراء</button></div>
-    <div class="card" style="border-color: #ffd700;"><h3>Mob VIP</h3><div class="price">20$</div><input type="text" id="m3" class="id-input" placeholder="اسمك ديسكورد"><button onclick="sendOrder('m3','Mob VIP')" class="btn btn-vip">شراء</button></div>
+    <div class="card"><h3>Mob Free</h3><div class="price">FREE</div><input type="text" id="m1" class="id-input" placeholder="ديسكورد"><button onclick="sendOrder('m1','Mob Free')" class="btn btn-mobile">تحميل</button></div>
+    <div class="card" style="border-color: var(--mobile);"><h3>Mob Pro</h3><div class="price">10$</div><input type="text" id="m2" class="id-input" placeholder="ديسكورد"><button onclick="sendOrder('m2','Mob Pro')" class="btn btn-mobile">شراء</button></div>
+    <div class="card" style="border-color: #ffd700;"><h3>Mob VIP</h3><div class="price">20$</div><input type="text" id="m3" class="id-input" placeholder="ديسكورد"><button onclick="sendOrder('m3','Mob VIP')" class="btn btn-vip">شراء</button></div>
 </div>
 
 <div id="admin-section">
     <h2 style="text-align:center;">إدارة الطلبات</h2>
-    <div style="overflow-x:auto;"><table class="order-table"><thead><tr><th>الزبون</th><th>المنتج</th><th>الوقت</th><th>الحالة</th><th>إجراء</th></tr></thead><tbody id="orders-list"></tbody></table></div>
+    <div style="overflow-x:auto;"><table class="order-table"><thead><tr><th>الزبون</th><th>المنتج</th><th>الحالة</th><th>إجراء</th></tr></thead><tbody id="orders-list"></tbody></table></div>
 </div>
 
 <footer onclick="loginAdmin()">DEVELOPED BY NAGI</footer>
@@ -91,22 +78,20 @@
 <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
 
 <script>
-    // إنشاء النجوم برمجياً لضمان العمل 100%
-    const bg = document.getElementById('bg-animation');
-    for (let i = 0; i < 150; i++) {
+    // إنشاء تأثير النجوم المتوهجة
+    const container = document.getElementById('star-container');
+    for (let i = 0; i < 50; i++) {
         const star = document.createElement('div');
         star.className = 'star';
-        const size = Math.random() * 3 + 'px';
-        star.style.width = size;
-        star.style.height = size;
         star.style.left = Math.random() * 100 + '%';
         star.style.top = Math.random() * 100 + '%';
-        star.style.animationDuration = (Math.random() * 3 + 2) + 's';
-        star.style.animationDelay = Math.random() * 5 + 's';
-        bg.appendChild(star);
+        const size = Math.random() * 4 + 2 + 'px';
+        star.style.width = size;
+        star.style.height = size;
+        star.style.setProperty('--speed', Math.random() * 3 + 2 + 's');
+        container.appendChild(star);
     }
 
-    // إعدادات Firebase
     const firebaseConfig = {
         apiKey: "AIzaSyATcxGXTqFzl0P9uG74fV21sNEs_8XWScc",
         authDomain: "nagishop-d1245.firebaseapp.com",
@@ -138,7 +123,7 @@
             s.forEach((c) => {
                 const d = c.val(); const k = c.key;
                 const isDone = d.status === 'done';
-                list.innerHTML += `<tr style="${isDone ? 'background: #0a290a;' : ''}"><td>${d.customer}</td><td>${d.product}</td><td>${d.time}</td><td>${isDone ? '✅' : '⏳'}</td>
+                list.innerHTML += `<tr style="${isDone ? 'background: #0a290a;' : ''}"><td>${d.customer}</td><td>${d.product}</td><td>${isDone ? '✅' : '⏳'}</td>
                 <td><button onclick="db.ref('orders/${k}').update({status:'done'})">✔</button>
                 <button onclick="db.ref('orders/${k}').remove()">✖</button></td></tr>`;
             });
